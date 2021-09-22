@@ -1,0 +1,41 @@
+---
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
+    
+#- debug: var=hostvars[groups.load_balancers[0]['default_ipv4']['address']
+#- debug: var=hostvars[groups.database_servers[0]]['default_ipv4']['address']
+#- debug: var=hostvars[groups.app_servers[0]]['default_ipv4']
+#- debug: var=hostvars[groups.app_servers[0]]['default_ipv4']['address']
+#- debug: var=hostvars[groups.app_servers[1]]['default_ipv4']['address']
+    
+#- name: Configure Hosts file for app01
+#  lineinfile: 
+#    dest: /etc/hosts
+#    regexp: '.*app-01$'
+#    line: "{{ hostvars[groups.app_servers[0]]['default_ipv4']['address'] }} app-01"
+#    state: present
+    
+#- name: Configure Hosts file for app02
+#  lineinfile: 
+#    dest: /etc/hosts
+#    regexp: '.*app-02$'
+#    line: "{{ hostvars[groups.app_servers[1]]['default_ipv4']['address'] }} app-02"
+#    state: present
+      
+- name: Install load balancer packages
+  package:
+    name: "{{ load_balancer_packages }}"
+    state: present
+
+- name: Configure haproxy load balancing
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+  notify: restart_haproxy
+
+- name: Enable Haproxy
+  service:
+    name: haproxy
+    state: started
+    enabled: true
