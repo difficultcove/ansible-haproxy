@@ -85,4 +85,4 @@ backend http
     balance     roundrobin
     mode http
     option httplog
-    server apps (( apps_ip_address }}:80 check
+    server apps {{ apps_ip_address }}:80 check
