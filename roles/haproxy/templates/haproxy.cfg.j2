@@ -69,15 +69,15 @@ frontend http
 # round robin balancing between the various backends
 #---------------------------------------------------------------------
 #---------------------------------------------------------------------
-backend api
-    mode tcp
-    balance     roundrobin
-    server api {{ api_ip_address }}:6443 check
+#backend api
+#    mode tcp
+#    balance     roundrobin
+#    server api {{ api_ip_address }}:6443 check
 
-backend machine-config
-    mode tcp
-    balance     roundrobin
-    server api {{ api_ip_address }}:22623 check
+#backend machine-config
+#    mode tcp
+#    balance     roundrobin
+#    server api {{ api_ip_address }}:22623 check
 
 backend https
     balance     roundrobin
