@@ -27,7 +27,7 @@ defaults
     option                  tcplog
     option                  dontlognull
     option http-server-close
-    option forwardfor       except 127.0.0.0/8
+#    option forwardfor       except 127.0.0.0/8
     option                  redispatch
     retries                 3
     timeout http-request    10s
@@ -38,28 +38,30 @@ defaults
     timeout http-keep-alive 10s
     timeout check           10s
     maxconn                 3000
+    mode                    http
 
 #---------------------------------------------------------------------
 # main frontend which proxys to the backends
 #---------------------------------------------------------------------
 frontend api
-    bind 127.0.0.1:6443
+    bind *:6443
     mode tcp
     default_backend             api
 
 frontend machine-config
-    bind 127.0.0.1:22623
+    bind *:22623
     mode tcp
-    default_backend		machine-config
+    default_backend		          machine-config
 
 frontend https
-    bind 127.0.0.1:443
+    bind *:443
     mode tcp
     default_backend             https
 
 frontend http
-    bind 127.0.0.1:80
+    bind *:80
     mode http
+    option forwardfor       except 127.0.0.0/8
     option httplog
     default_backend             http
 
