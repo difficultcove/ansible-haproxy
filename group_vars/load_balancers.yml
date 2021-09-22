@@ -1,3 +1,7 @@
 ---
 load_balancer_packages:
   - haproxy
+  - httpd
+  - bind-utils
+  - wget
+  - unzip
