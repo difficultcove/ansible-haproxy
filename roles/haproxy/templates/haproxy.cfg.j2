@@ -43,15 +43,15 @@ defaults
 #---------------------------------------------------------------------
 # main frontend which proxys to the backends
 #---------------------------------------------------------------------
-frontend api
-    bind *:6443
-    mode tcp
-    default_backend             api
+#frontend api
+#    bind *:6443
+#    mode tcp
+#    default_backend             api
 
-frontend machine-config
-    bind *:22623
-    mode tcp
-    default_backend		          machine-config
+#frontend machine-config
+#    bind *:22623
+#    mode tcp
+#    default_backend		          machine-config
 
 frontend https
     bind *:443
