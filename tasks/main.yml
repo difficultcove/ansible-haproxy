@@ -1,0 +1,6 @@
+---
+# tasks file for haproxy
+- hosts: balancer
+  sudo: yes
+  roles:
+    - { role: geerlingguy.haproxy }
